@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - My Application</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>@User .Identity.Name</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Product" asp-action="Create">Create Product</a></li>
+                    }
+                    <li>
+                        <form asp-action="Logout" method="post">
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                    <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                }
+            </ul>
+        </nav>
+    </header>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    <footer>
+        <p>&copy; 2023 - My Application</p>
+    </footer>
+</body>
+</html>
